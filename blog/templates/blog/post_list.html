@@ -34,6 +34,17 @@ color:#549;
 </style>
 
 <body id="a" style="background-color:#549">
+<div>
+	<h1>Phenomenal Blog Posts</h1>
+	</div>
+  <div>
+  {% for post in posts %}
+  <h1><a href="">{{ post.title }}</a></h1>
+  <p>{{ post.published_date }} </p>
+  <p>{{ post.text|linebreaksbr }}</p>
+  {% endfor %}
+  </div>
+
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
