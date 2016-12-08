@@ -1,103 +1,12 @@
-<!DOCTYPE html>
-<html>
-<title>EclecticExistential</title>
-<head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-</head>
-
-<style>
-body{
-  font:18px arial;
-  text-align:center;
-}
-#b{background-color:white;
-border-radius:10px;
-  margin-top:10%;
-  padding:3% 3% 2%;
-}
-#d{
-  background-color: #549;
-  border:1px solid #DDD;
-  border-radius:10px;
-  padding:1%;
-  margin-top:5%;
-  margin-left:25%;
-}
-#e{margin-right:25%;}
-#m{font:18px montserrat;line-height: 24px;
-color:#549;
-}
-#name{
-  visibility:hidden;}
-
-
-</style>
-
-<body id="a" style="background-color:#549">
-<div>
-	<h1>Phenomenal Blog Posts</h1>
-	</div>
-  <div>
-  {% for post in posts %}
-  <h1><a href="">{{ post.title }}</a></h1>
-  <p>{{ post.published_date }} </p>
-  <p>{{ post.text|linebreaksbr }}</p>
-  {% endfor %}
-  </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-3">
-      </div>
-  <div id="b" class= "col-sm-6 col-xs-12">
-    <div id="m">When ego is lost, then universality exists.
-    </div>
-    <a href="https://twitter.com/share">
-      <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png" style="height:35px; width:35px;" id="e"></a>
-    <input type="button" id="d" value="Grab another quote!" style="color:aliceblue">
-  </div>
-  <div id="name">Written by J.Cottner
-  </div>
-    </div>
-  </div>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-</body>
-<script>
-document.getElementById("d").addEventListener("click", function colors(){
-  var color = ["#663399", "#006400", "#A5A079","#05949F","#738293","#320485","#826920"];
-  var a=document.getElementById("a");
-  var d=document.getElementById("d");
-  var m=document.getElementById("m"); 
-    m.innerHTML=quote();
-    a.colorIdx = a.colorIdx || 0;
-    d.colorIdx =d.colorIdx || 0;
-    m.colorIdx =m.colorIdx || 0;
-    a.style.background=color[a.colorIdx++ % color.length];
-    d.style.background=color[d.colorIdx++ % color.length];
-    m.style.color=color[m.colorIdx++ % color.length];
-});
-function quote(){
-  function p(x){
-  var p=(Math.floor((Math.random())*x)+1);
-  return p;
-}
-  var quote = ["The problem is never how to get new, innovative thoughts into your mind, but how to get old ones out. Every mind is a building filled with archaic furniture. Clean out a corner of your mind and creativity will instantly fill it. -Dee Hock","Happiness is that state of consciousness which proceeds from the achievement of one's values.  -Ayn Rand","In the attitude of silence the soul finds the path in a clearer light, and what is elusive and deceptive resolves itself into crystal clearness. Our life is a long and arduous quest after Truth. -Mahatma Gandhi","If the world should blow itself up, the last audible voice would be that of an expert saying it can't be done. -Peter Ustinov","To become aware of the possibility of the search is to be onto something. -Walker Percy","I merely took the energy it takes to pout and wrote some blues. -Duke Ellington","Management is doing things right; leadership is doing the right things. -Peter Drucker","They've built their own prison, so they exist in a state of schizophrenia. They're both guards and prisoners and as a result they no longer have, having been lobotomized, the capacity to leave the prison they've made, or to even see it as a prison. -Andre, My Dinner with Andre","Do you know, in Sanskrit the root of the verb 'to be' is the same as 'to grow' or 'to make grow'. -Andre, My Dinner with Andre","That trip is going to be successful or unsuccessful based on the state of the airplane and the state of the pilot, and the cookie is in no position to know about that. -Wally, My Dinner with Andre", "For me, I am driven by two main philosophies: know more today about the world than I knew yesterday and lessen the suffering of others. You'd be surprised how far that gets you. -Neil deGrasse Tyson","With guns, you kill terrorists, with education you can kill terrorism. -Malala Yousafzai","It is not a matter of right or wrong, it is a matter of observation. -E.E."]
-  var y=p(13);switch (y){
-    case 1: return quote[0]; break;
-  case 2: return quote[1]; break;
-  case 3: return quote[2]; break;
-  case 4: return quote[3]; break;
-    case 5: return quote[4];break;
-    case 6: return quote[5];break;
-    case 7: return quote[6];break;
-    case 8: return quote[7];break;
-    case 9: return quote[8];break;
-    case 10: return quote[9];break;
-	case 11: return quote[10];break;
-	case 12: return quote[11];break;
-	case 13: return quote[12];break;
-    } 
- return;
-}
-</script>
-</html>
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
